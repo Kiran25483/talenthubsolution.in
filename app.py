@@ -65,8 +65,9 @@ def init_db():
         )
     """)
 
-    # Add sample jobs only if table is empty
-    count = conn.execute("SELECT COUNT(*) FROM jobs").fetchone()[0]
+    count = conn.execute(
+        "SELECT COUNT(*) FROM jobs"
+    ).fetchone()[0]
 
     if count == 0:
         jobs = [
@@ -261,4 +262,9 @@ def contact():
     return render_template("contact.html")
 
 
-gunicorn app:app
+init_db()
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
