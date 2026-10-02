@@ -1,22 +1,26 @@
-console.log("TalentHub Solutions website loaded.");
+const registrationForm = document.querySelector("[data-password-confirmation]");
 
+if (registrationForm) {
+    const password = registrationForm.querySelector("#password");
+    const confirmation = registrationForm.querySelector("#confirm_password");
 
-// Automatically hide alerts
+    const validatePasswords = () => {
+        confirmation.setCustomValidity(
+            confirmation.value && confirmation.value !== password.value
+                ? "Passwords do not match."
+                : ""
+        );
+    };
 
-setTimeout(function () {
+    password.addEventListener("input", validatePasswords);
+    confirmation.addEventListener("input", validatePasswords);
+}
 
-    const alerts = document.querySelectorAll(".alert");
-
-    alerts.forEach(function (alert) {
-
+window.setTimeout(() => {
+    document.querySelectorAll(".alert-success").forEach((alert) => {
         alert.style.transition = "opacity 0.5s";
-
         alert.style.opacity = "0";
 
-        setTimeout(function () {
-            alert.remove();
-        }, 500);
-
+        window.setTimeout(() => alert.remove(), 500);
     });
-
-}, 4000);
+}, 7000);

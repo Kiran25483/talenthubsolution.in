@@ -8,12 +8,14 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}TalentHub Solutions{% endblock %}</title>
+    <title>{% block title %}TalentHub Solution{% endblock %}</title>
 
+    <!-- Bootstrap 5 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+    <!-- Custom CSS -->
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}">
@@ -22,56 +24,134 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold"
-           href="/">
-            TalentHub Solutions
+        <!-- LOGO -->
+        <a class="navbar-brand d-flex align-items-center"
+           href="{{ url_for('home') }}">
+
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="TalentHub Solutions"
+                class="brand-logo">
+
         </a>
 
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+
+        <!-- MOBILE MENU BUTTON -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
+
+        <!-- NAVIGATION -->
         <div class="collapse navbar-collapse"
              id="navbarNav">
 
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link{% if request.endpoint == 'home' %} active{% endif %}"
+                       href="{{ url_for('home') }}">
+                        Home
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link{% if request.endpoint == 'about' %} active{% endif %}"
+                       href="{{ url_for('about') }}">
+                        About
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/services">Services</a>
+                    <a class="nav-link{% if request.endpoint == 'services' %} active{% endif %}"
+                       href="{{ url_for('services') }}">
+                        Services
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/jobs">Jobs</a>
+                    <a class="nav-link{% if request.endpoint == 'jobs' %} active{% endif %}"
+                       href="{{ url_for('jobs') }}">
+                        Jobs
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/employers">Employers</a>
+                    <a class="nav-link{% if request.endpoint == 'employers' %} active{% endif %}"
+                       href="{{ url_for('employers') }}">
+                        Employers
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/candidates">Candidates</a>
+                    <a class="nav-link{% if request.endpoint == 'candidates' %} active{% endif %}"
+                       href="{{ url_for('candidates') }}">
+                        Candidates
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link{% if request.endpoint == 'contact' %} active{% endif %}"
+                       href="{{ url_for('contact') }}">
+                        Contact
+                    </a>
                 </li>
+
+
+                <!-- ================= AUTHENTICATION ================= -->
+
+                {% if session.get("user_id") %}
+
+                    <!-- DASHBOARD -->
+                    <li class="nav-item ms-lg-2">
+                                <a class="nav-link{% if request.endpoint == 'dashboard' %} active{% endif %}"
+                           href="{{ url_for('dashboard') }}">
+                            Dashboard
+                        </a>
+                    </li>
+
+
+                    <!-- LOGOUT -->
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('logout') }}">
+                            Logout
+                        </a>
+                    </li>
+
+                {% else %}
+
+                    <!-- LOGIN -->
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link"
+                           href="{{ url_for('login') }}">
+                            Login
+                        </a>
+                    </li>
+
+
+                    <!-- REGISTER -->
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('register') }}">
+                            Register
+                        </a>
+                    </li>
+
+                {% endif %}
 
             </ul>
 
@@ -82,16 +162,28 @@
 </nav>
 
 
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
 
     {% if messages %}
 
         <div class="container mt-3">
 
-            {% for message in messages %}
+            {% for category, message in messages %}
 
-                <div class="alert alert-success">
+                {% set alert_type = category if category in ['success', 'warning', 'danger', 'info'] else 'info' %}
+
+                <div class="alert alert-{{ alert_type }} alert-dismissible fade show"
+                     role="alert">
+
                     {{ message }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    </button>
+
                 </div>
 
             {% endfor %}
@@ -103,22 +195,26 @@
 {% endwith %}
 
 
-{% block content %}
-{% endblock %}
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
 
 
 <footer class="footer mt-5">
 
-    <div class="container text-center">
+    <div class="container text-center py-4">
 
-        <h5>TalentHub Solutions</h5>
+        <h5>TalentHub Solution</h5>
 
         <p>
             Technical & Non-Technical Recruitment Solutions
         </p>
 
-        <p>
-            © 2026 TalentHub Solutions. All rights reserved.
+        <p class="mb-0">
+            © 2026 TalentHub Solution. All rights reserved.
         </p>
 
     </div>
@@ -126,11 +222,14 @@
 </footer>
 
 
+<!-- ================= BOOTSTRAP JS ================= -->
+
 <script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 
 </body>
+
 </html>

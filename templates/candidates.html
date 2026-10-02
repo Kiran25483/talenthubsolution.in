@@ -1,98 +1,191 @@
 {% extends "base.html" %}
 
-{% block title %}Candidates | TalentHub Solutions{% endblock %}
+{% block title %}Submit Your Resume - TalentHub Solution{% endblock %}
 
 {% block content %}
 
-<div class="container page-section">
+<div class="container page-section py-5">
 
-    <div class="form-container">
+    <div class="row justify-content-center">
 
-        <h1>Submit Your Resume</h1>
+        <div class="col-lg-7 col-md-9">
 
-        <p>
-            Register with TalentHub Solutions for suitable
-            career opportunities.
-        </p>
+            <div class="form-container">
 
-        <form method="POST">
+                <!-- Page Heading -->
+                <div class="text-center mb-4">
 
-            <div class="mb-3">
+                    <p class="eyebrow">Candidate profile</p>
+                    <h1>Submit Your Resume</h1>
 
-                <label>Full Name</label>
+                    {% if selected_job_id %}
+                    <p class="selected-job-note">Your resume will be submitted for the opportunity you selected.</p>
+                    {% endif %}
 
-                <input type="text"
-                       name="name"
-                       class="form-control"
-                       required>
+                    <p class="text-muted">
+                        Register with TalentHub Solution and connect with
+                        suitable career opportunities.
+                    </p>
+
+                </div>
+
+
+                <!-- Resume Form -->
+                <form method="POST"
+                      action="{{ url_for('candidates') }}"
+                      enctype="multipart/form-data">
+
+                    {% if selected_job_id %}
+                    <input type="hidden" name="job_id" value="{{ selected_job_id }}">
+                    {% endif %}
+
+
+                    <!-- Full Name -->
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control"
+                            value="{{ session.get('user_name', '') }}"
+                            autocomplete="name"
+                            readonly
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="mb-3">
+
+                        <label for="email" class="form-label">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            value="{{ session.get('user_email', '') }}"
+                            autocomplete="email"
+                            readonly
+                            placeholder="Enter your email address"
+                            required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+
+                        <label for="phone" class="form-label">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            placeholder="Enter your phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            required>
+
+                        <div class="form-text">
+                            Enter a valid 10-digit mobile number.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Skills -->
+                    <div class="mb-3">
+
+                        <label for="skills" class="form-label">
+                            Skills
+                        </label>
+
+                        <input
+                            type="text"
+                            id="skills"
+                            name="skills"
+                            class="form-control"
+                            placeholder="Python, Azure, Java, HR, Sales...">
+
+                        <div class="form-text">
+                            Mention your key technical or professional skills.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Experience -->
+                    <div class="mb-3">
+
+                        <label for="experience" class="form-label">
+                            Experience
+                        </label>
+
+                        <input
+                            type="text"
+                            id="experience"
+                            name="experience"
+                            class="form-control"
+                            placeholder="2 Years / Fresher"
+                            required>
+
+                    </div>
+
+
+                    <!-- Resume Upload -->
+                    <div class="mb-4">
+
+                        <label for="resume" class="form-label">
+                            Upload Resume
+                        </label>
+
+                        <input
+                            type="file"
+                            id="resume"
+                            name="resume"
+                            class="form-control"
+                            accept=".pdf,.doc,.docx"
+                            required>
+
+                        <div class="form-text">
+                            Accepted formats: PDF, DOC, DOCX.
+                            Maximum file size: 10 MB.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-lg">
+
+                            Submit Resume
+
+                        </button>
+
+                    </div>
+
+                </form>
 
             </div>
 
-
-            <div class="mb-3">
-
-                <label>Email</label>
-
-                <input type="email"
-                       name="email"
-                       class="form-control"
-                       required>
-
-            </div>
-
-
-            <div class="mb-3">
-
-                <label>Phone</label>
-
-                <input type="text"
-                       name="phone"
-                       class="form-control">
-
-            </div>
-
-
-            <div class="mb-3">
-
-                <label>Skills</label>
-
-                <input type="text"
-                       name="skills"
-                       class="form-control"
-                       placeholder="Python, Azure, Java, HR, Sales...">
-
-            </div>
-
-
-            <div class="mb-3">
-
-                <label>Experience</label>
-
-                <input type="text"
-                       name="experience"
-                       class="form-control"
-                       placeholder="2 Years">
-
-            </div>
-
-
-            <div class="mb-3">
-
-                <label>Resume File Name / Link</label>
-
-                <input type="text"
-                       name="resume"
-                       class="form-control"
-                       placeholder="resume.pdf">
-
-            </div>
-
-
-            <button class="btn btn-primary">
-                Submit Resume
-            </button>
-
-        </form>
+        </div>
 
     </div>
 

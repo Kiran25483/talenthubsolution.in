@@ -1,18 +1,21 @@
+
 {% extends "base.html" %}
 
-{% block title %}Services | TalentHub Solutions{% endblock %}
+{% block title %}Recruitment Services | TalentHub Solutions{% endblock %}
 
 {% block content %}
 
 <div class="container page-section">
 
-    <h1 class="text-center mb-5">
-        Our Services
-    </h1>
+    <div class="page-heading text-center mb-5">
+        <p class="eyebrow">What we do</p>
+        <h1>Recruitment Services</h1>
+        <p class="lead">Flexible talent solutions for growing teams, specialized roles, and career-ready professionals.</p>
+    </div>
 
     <div class="row g-4">
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>IT Recruitment</h3>
                 <p>
@@ -23,7 +26,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>Non-IT Recruitment</h3>
                 <p>
@@ -34,7 +37,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>Contract Staffing</h3>
                 <p>
@@ -44,7 +47,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>Permanent Hiring</h3>
                 <p>
@@ -54,7 +57,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>Bulk Hiring</h3>
                 <p>
@@ -64,7 +67,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <div class="service-card">
                 <h3>Executive Search</h3>
                 <p>
@@ -74,6 +77,11 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="page-actions text-center mt-5">
+        <p class="lead">Ready to move forward with your hiring plan?</p>
+        <a href="{{ url_for('employers') }}" class="btn btn-primary">Discuss a Hiring Need</a>
     </div>
 
 </div>

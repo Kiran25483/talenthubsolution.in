@@ -1,9 +1,9 @@
+
 {% extends "base.html" %}
 
 {% block title %}
 TalentHub Solutions | Recruitment Consultancy
 {% endblock %}
-
 
 {% block content %}
 
@@ -190,7 +190,7 @@ TalentHub Solutions | Recruitment Consultancy
                         {{ job.salary }}
                     </p>
 
-                    <a href="/candidates"
+                          <a href="{{ url_for('candidates', job_id=job.id) }}"
                        class="btn btn-primary">
                         Apply Now
                     </a>

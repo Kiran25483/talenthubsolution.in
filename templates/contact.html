@@ -1,70 +1,184 @@
 {% extends "base.html" %}
 
-{% block title %}Contact | TalentHub Solutions{% endblock %}
+{% block title %}Contact Us | TalentHub Solution{% endblock %}
 
 {% block content %}
 
-<div class="container page-section">
+<div class="container page-section py-5">
 
-    <div class="row">
+    <div class="row g-5">
 
-        <div class="col-md-5">
+        <!-- ================= CONTACT INFORMATION ================= -->
 
-            <h1>Contact Us</h1>
+        <div class="col-md-5 contact-details">
 
-            <p>
-                Have a hiring requirement or looking
-                for a new opportunity?
+            <p class="eyebrow">We are here to help</p>
+            <h1 class="mb-4">Contact Us</h1>
+
+            <p class="lead">
+                Have a hiring requirement or looking for a new career
+                opportunity? Get in touch with TalentHub Solution.
             </p>
 
+            <hr>
+
+            <!-- Email -->
             <p>
                 <strong>Email:</strong><br>
-                hr@talenthubsolutions.com
+                <a href="mailto:hr@talenthubsolution.in">
+                    hr@talenthubsolution.in
+                </a>
             </p>
 
+
+            <!-- Phone -->
             <p>
                 <strong>Phone:</strong><br>
-                +91 XXXXX XXXXX
+
+                <a href="tel:+918175020825">
+                    +91 8175020825
+                </a>
+                <br>
+
+                <a href="tel:+919910826865">
+                    +91 9910826865
+                </a>
             </p>
 
+
+            <!-- GST -->
+            <p>
+                <strong>GST No:</strong><br>
+                09HMBPK6067B1Z1
+            </p>
+
+
+            <!-- Location -->
             <p>
                 <strong>Location:</strong><br>
                 Delhi NCR, India
             </p>
 
+
+            <!-- Business Information -->
+            <p>
+                <strong>Business:</strong><br>
+                Recruitment Consultancy & Training
+            </p>
+
         </div>
 
+
+        <!-- ================= CONTACT FORM ================= -->
 
         <div class="col-md-7">
 
             <div class="form-container">
 
-                <form method="POST">
+            <p class="eyebrow">Send a message</p>
+                <h2 class="mb-4">Send Us a Message</h2>
 
-                    <input type="text"
-                           name="name"
-                           class="form-control mb-3"
-                           placeholder="Your Name"
-                           required>
+                <form
+                    method="POST"
+                    action="{{ url_for('contact') }}">
 
-                    <input type="email"
-                           name="email"
-                           class="form-control mb-3"
-                           placeholder="Email"
-                           required>
 
-                    <input type="text"
-                           name="phone"
-                           class="form-control mb-3"
-                           placeholder="Phone">
+                    <!-- Name -->
+                    <div class="mb-3">
 
-                    <textarea name="message"
-                              class="form-control mb-3"
-                              rows="6"
-                              placeholder="Your Message"></textarea>
+                        <label
+                            for="name"
+                            class="form-label">
 
-                    <button class="btn btn-primary">
+                            Your Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="mb-3">
+
+                        <label
+                            for="email"
+                            class="form-label">
+
+                            Email Address
+
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email address"
+                            required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+
+                        <label
+                            for="phone"
+                            class="form-label">
+
+                            Phone Number
+
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            placeholder="Enter your phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10">
+
+                    </div>
+
+
+                    <!-- Message -->
+                    <div class="mb-3">
+
+                        <label
+                            for="message"
+                            class="form-label">
+
+                            Your Message
+
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            class="form-control"
+                            rows="6"
+                            placeholder="Tell us how we can help you..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- Submit -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+
                         Send Message
+
                     </button>
 
                 </form>

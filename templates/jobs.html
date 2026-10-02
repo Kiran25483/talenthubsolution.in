@@ -1,74 +1,77 @@
+
 {% extends "base.html" %}
 
-{% block title %}Jobs | TalentHub Solutions{% endblock %}
+{% block title %}Current Opportunities | TalentHub Solutions{% endblock %}
 
 {% block content %}
 
 <div class="container page-section">
+    <header class="page-heading mb-4">
+        <p class="eyebrow">Find your next move</p>
+        <h1>Current Opportunities</h1>
+        <p class="lead">Explore open roles from teams looking for their next great hire.</p>
+    </header>
 
-    <h1 class="text-center mb-5">
-        Current Job Opportunities
-    </h1>
-
-    <div class="row g-4">
-
-        {% for job in jobs %}
-
-        <div class="col-md-6">
-
-            <div class="job-card">
-
-                <span class="badge bg-primary">
-                    {{ job.category }}
-                </span>
-
-                <h3 class="mt-3">
-                    {{ job.title }}
-                </h3>
-
-                <p>
-                    <strong>Company:</strong>
-                    {{ job.company }}
-                </p>
-
-                <p>
-                    <strong>Location:</strong>
-                    {{ job.location }}
-                </p>
-
-                <p>
-                    <strong>Experience:</strong>
-                    {{ job.experience }}
-                </p>
-
-                <p>
-                    <strong>Salary:</strong>
-                    {{ job.salary }}
-                </p>
-
-                <p>
-                    {{ job.description }}
-                </p>
-
-                <a href="/candidates?job_id={{ job.id }}"
-                   class="btn btn-primary">
-                    Apply Now
-                </a>
-
+    <form class="job-search-panel mb-4" method="GET" action="{{ url_for('jobs') }}">
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-5">
+                <label class="form-label" for="job-search">Search roles</label>
+                <input class="form-control" id="job-search" name="q" type="search"
+                       value="{{ search_query }}" placeholder="Job title, company, or keyword">
             </div>
-
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="job-category">Function</label>
+                <select class="form-select" id="job-category" name="category">
+                    <option value="">All functions</option>
+                    {% for category in categories %}
+                    <option value="{{ category.category }}"{% if selected_category == category.category %} selected{% endif %}>{{ category.category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="job-location">Location</label>
+                <input class="form-control" id="job-location" name="location" type="search"
+                       value="{{ selected_location }}" placeholder="City or region">
+            </div>
+            <div class="col-lg-2 d-flex gap-2">
+                <button class="btn btn-primary flex-grow-1" type="submit">Search</button>
+                <a class="btn btn-outline-primary" href="{{ url_for('jobs') }}" aria-label="Clear filters" title="Clear filters">Clear</a>
+            </div>
         </div>
+    </form>
 
-        {% else %}
-
-        <div class="text-center">
-            <p>No jobs available currently.</p>
-        </div>
-
-        {% endfor %}
-
+    <div class="results-summary" aria-live="polite">
+        <strong>{{ jobs|length }}</strong> {{ 'opportunity' if jobs|length == 1 else 'opportunities' }}
     </div>
 
+    <div class="row g-4">
+        {% for job in jobs %}
+        <div class="col-md-6 col-xl-4">
+            <article class="job-card d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                    <span class="badge">{{ job.category or 'General' }}</span>
+                    <span class="job-location">{{ job.location }}</span>
+                </div>
+                <h2>{{ job.title }}</h2>
+                <p class="job-company">{{ job.company }}</p>
+                <p class="job-description">{{ job.description }}</p>
+                <dl class="job-details mt-auto">
+                    <div><dt>Experience</dt><dd>{{ job.experience or 'Not specified' }}</dd></div>
+                    <div><dt>Salary</dt><dd>{{ job.salary or 'Not specified' }}</dd></div>
+                </dl>
+                <a href="{{ url_for('candidates', job_id=job.id) }}" class="btn btn-primary align-self-start">Apply Now</a>
+            </article>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="empty-state">
+                <h2>No matching roles yet</h2>
+                <p>Try a different keyword, function, or location.</p>
+                <a class="btn btn-outline-primary" href="{{ url_for('jobs') }}">Show all opportunities</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

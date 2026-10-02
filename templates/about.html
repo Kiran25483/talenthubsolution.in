@@ -1,38 +1,158 @@
+
 {% extends "base.html" %}
 
-{% block title %}About | TalentHub Solutions{% endblock %}
+{% block title %}About Us - TalentHub Solution{% endblock %}
 
 {% block content %}
 
 <div class="container page-section">
 
-    <h1>About TalentHub Solutions</h1>
+    <!-- Page Heading -->
+    <div class="page-heading text-center mb-5">
+        <p class="eyebrow">Who we are</p>
+        <h1>About TalentHub Solution</h1>
+        <p class="lead">
+            Connecting businesses with skilled professionals and helping
+            candidates build successful careers.
+        </p>
+    </div>
 
-    <p class="lead">
-        TalentHub Solutions is a recruitment consultancy
-        focused on connecting businesses with qualified
-        professionals.
-    </p>
+    <!-- About Company -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
 
-    <hr>
+            <p>
+                <strong>TalentHub Solution</strong> is a professional
+                recruitment consultancy and training company providing
+                comprehensive <strong>technical and non-technical hiring
+                solutions</strong> for businesses across various industries.
+            </p>
 
-    <h3>Our Mission</h3>
+            <p>
+                We help organizations identify, attract, and hire qualified
+                professionals for IT, software, AI/ML, data, cloud, DevOps,
+                testing, HR, finance, sales, marketing, operations,
+                administration, and other business functions.
+            </p>
 
-    <p>
-        To simplify hiring for organizations and help
-        candidates discover suitable career opportunities.
-    </p>
+            <p>
+                Along with recruitment services, TalentHub Solution provides
+                <strong>job-oriented training and career development
+                programs</strong> designed to help candidates improve their
+                technical and professional skills, prepare for interviews,
+                and become job-ready.
+            </p>
 
-    <h3>Our Expertise</h3>
+            <p>
+                Our services include
+                <strong>technical recruitment, non-technical recruitment,
+                candidate sourcing and screening, corporate hiring support,
+                professional training, resume assistance, interview
+                preparation, and career guidance.</strong>
+            </p>
 
-    <ul>
-        <li>Technical Recruitment</li>
-        <li>Non-Technical Recruitment</li>
-        <li>Contract Staffing</li>
-        <li>Permanent Hiring</li>
-        <li>Bulk Hiring</li>
-        <li>Executive Search</li>
-    </ul>
+            <p>
+                At TalentHub Solution, we aim to create a strong connection
+                between <strong>employers looking for skilled talent</strong>
+                and <strong>candidates looking for the right career
+                opportunities.</strong>
+            </p>
+
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Mission -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <h3>Our Mission</h3>
+
+            <p>
+                To simplify hiring for organizations and help candidates
+                discover suitable career opportunities through professional
+                recruitment, training, and career development services.
+            </p>
+        </div>
+
+        <!-- Vision -->
+        <div class="col-md-6">
+            <h3>Our Vision</h3>
+
+            <p>
+                To build a trusted talent ecosystem where businesses find
+                the right professionals and candidates find meaningful
+                opportunities to grow their careers.
+            </p>
+        </div>
+    </div>
+
+    <!-- Expertise -->
+    <div class="mb-5">
+
+        <h3>Our Expertise</h3>
+
+        <div class="row mt-3">
+
+            <div class="col-md-6">
+                <ul>
+                    <li>Technical Recruitment</li>
+                    <li>Non-Technical Recruitment</li>
+                    <li>Contract Staffing</li>
+                    <li>Permanent Hiring</li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <ul>
+                    <li>Bulk Hiring</li>
+                    <li>Executive Search</li>
+                    <li>Candidate Sourcing & Screening</li>
+                    <li>Corporate Hiring Support</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Training & Career Support -->
+    <div class="mb-5">
+
+        <h3>Training & Career Development</h3>
+
+        <p>
+            We also support candidates through job-oriented training and
+            career development services, including:
+        </p>
+
+        <ul>
+            <li>Technical & Professional Training</li>
+            <li>Resume Preparation</li>
+            <li>Interview Preparation</li>
+            <li>Career Guidance</li>
+            <li>Job-Ready Skill Development</li>
+        </ul>
+
+    </div>
+
+    <!-- Closing Section -->
+    <div class="text-center mt-5">
+
+        <h3>Recruit. Train. Grow.</h3>
+
+        <p>
+            TalentHub Solution connects organizations with the right talent
+            while helping professionals develop the skills they need to
+            achieve their career goals.
+        </p>
+
+    </div>
+
+    <div class="page-actions text-center mt-4">
+        <a href="{{ url_for('services') }}" class="btn btn-primary me-2">Explore Services</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Talk to Our Team</a>
+    </div>
 
 </div>
 

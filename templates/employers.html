@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Hire Talent | TalentHub Solutions{% endblock %}
@@ -8,19 +9,21 @@
 
     <div class="form-container">
 
-        <h1>Hire Talent</h1>
+        <div class="page-heading mb-4">
+            <p class="eyebrow">For employers</p>
+            <h1>Build your next great team</h1>
 
-        <p>
-            Tell us about your hiring requirement.
-        </p>
+            <p class="lead">Share the role and hiring details. Our recruitment team will follow up with a tailored shortlist.</p>
+        </div>
 
-        <form method="POST">
+      <form class="employer-form" method="POST">
 
             <div class="mb-3">
 
-                <label>Company Name</label>
+                  <label for="company" class="form-label">Company Name</label>
 
                 <input type="text"
+                      id="company"
                        name="company"
                        class="form-control"
                        required>
@@ -30,9 +33,10 @@
 
             <div class="mb-3">
 
-                <label>Contact Person</label>
+                  <label for="contact_person" class="form-label">Contact Person</label>
 
                 <input type="text"
+                      id="contact_person"
                        name="contact_person"
                        class="form-control"
                        required>
@@ -42,9 +46,10 @@
 
             <div class="mb-3">
 
-                <label>Email</label>
+                  <label for="email" class="form-label">Work Email</label>
 
                 <input type="email"
+                      id="email"
                        name="email"
                        class="form-control"
                        required>
@@ -54,9 +59,10 @@
 
             <div class="mb-3">
 
-                <label>Phone</label>
+                  <label for="phone" class="form-label">Phone</label>
 
                 <input type="text"
+                      id="phone"
                        name="phone"
                        class="form-control">
 
@@ -65,9 +71,10 @@
 
             <div class="mb-3">
 
-                <label>Job Title</label>
+                  <label for="job_title" class="form-label">Role to fill</label>
 
                 <input type="text"
+                      id="job_title"
                        name="job_title"
                        class="form-control"
                        required>
@@ -77,9 +84,10 @@
 
             <div class="mb-3">
 
-                <label>Number of Openings</label>
+                  <label for="openings" class="form-label">Number of Openings</label>
 
                 <input type="number"
+                      id="openings"
                        name="openings"
                        class="form-control"
                        min="1">
@@ -89,9 +97,10 @@
 
             <div class="mb-3">
 
-                <label>Job Description</label>
+                <label for="description" class="form-label">Role Details</label>
 
                 <textarea name="description"
+                          id="description"
                           class="form-control"
                           rows="6"></textarea>
 
