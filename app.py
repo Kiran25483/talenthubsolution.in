@@ -1,4 +1,6 @@
 import os
+import hmac
+import secrets
 import sqlite3
 import uuid
 
@@ -9,7 +11,9 @@ from flask import (
     redirect,
     flash,
     session,
-    url_for
+    url_for,
+    abort,
+    send_from_directory
 )
 
 from werkzeug.security import (
@@ -26,19 +30,97 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-app.secret_key = "talenthub-secret-key-change-this"
+app.secret_key = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
 
 DB = "consultancy.db"
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "").strip().casefold()
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
+
+BLOG_POSTS = [
+    {
+        "slug": "build-a-resume-recruiters-can-scan",
+        "category": "Career toolkit",
+        "read_time": "4 min read",
+        "title": "Build a resume recruiters can scan",
+        "excerpt": "Make the most relevant parts of your experience easy to find, understand, and verify.",
+        "sections": [
+            {
+                "heading": "Start with the role in mind",
+                "body": "Read the job description and identify the skills it emphasizes. Bring your closest matching experience forward, while keeping every detail accurate."
+            },
+            {
+                "heading": "Show evidence, not just keywords",
+                "body": "Describe what you worked on, how you contributed, and what changed as a result. Use numbers only when you can confidently explain them."
+            },
+            {
+                "heading": "Keep the layout easy to follow",
+                "body": "Use clear section headings, consistent dates, and concise bullet points. Check the final document on both a phone and a desktop before sending it."
+            }
+        ]
+    },
+    {
+        "slug": "prepare-for-an-interview-with-confidence",
+        "category": "Interview preparation",
+        "read_time": "5 min read",
+        "title": "Prepare for an interview with confidence",
+        "excerpt": "A simple preparation routine helps you explain your experience clearly and ask better questions.",
+        "sections": [
+            {
+                "heading": "Connect your experience to the role",
+                "body": "Choose a few examples that show the skills the role requires. Be ready to explain the situation, your actions, and the outcome in your own words."
+            },
+            {
+                "heading": "Practice out loud",
+                "body": "Rehearse concise answers to common questions, but avoid memorizing a script. A natural explanation is easier to adapt when the conversation changes direction."
+            },
+            {
+                "heading": "Prepare thoughtful questions",
+                "body": "Ask about the team's priorities, how success is evaluated, and what the next steps in the process look like."
+            }
+        ]
+    },
+    {
+        "slug": "choose-training-that-moves-you-forward",
+        "category": "Training & development",
+        "read_time": "4 min read",
+        "title": "Choose training that moves you forward",
+        "excerpt": "Focus your learning on a real target role, then build practical evidence of the skills you gain.",
+        "sections": [
+            {
+                "heading": "Pick a realistic role target",
+                "body": "Review several job descriptions for the role you want. Note the skills that appear repeatedly and compare them with what you already know."
+            },
+            {
+                "heading": "Learn by doing",
+                "body": "Pair lessons with exercises or small projects. Practical work helps you test your understanding and gives you specific examples to discuss with employers."
+            },
+            {
+                "heading": "Make a plan for the next step",
+                "body": "Update your resume with skills you can demonstrate, practice explaining your work, and apply to opportunities that match your current experience."
+            }
+        ]
+    }
+]
 
 
 # ============================================================
 # UPLOAD CONFIGURATION
 # ============================================================
 
-UPLOAD_FOLDER = os.path.join(
-    "static",
+UPLOAD_FOLDER = os.environ.get(
+    "RESUME_UPLOAD_FOLDER",
+    os.path.join(app.instance_path, "uploads", "resumes")
+)
+
+LEGACY_UPLOAD_FOLDER = os.path.join(
+    app.static_folder,
     "uploads",
     "resumes"
+)
+
+PROFILE_PHOTO_UPLOAD_FOLDER = os.environ.get(
+    "PROFILE_PHOTO_UPLOAD_FOLDER",
+    os.path.join(app.instance_path, "uploads", "profile_photos")
 )
 
 ALLOWED_EXTENSIONS = {
@@ -47,13 +129,23 @@ ALLOWED_EXTENSIONS = {
     "docx"
 }
 
+ALLOWED_IMAGE_EXTENSIONS = {
+    "jpg",
+    "jpeg",
+    "png",
+    "webp"
+}
+
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+MAX_PROFILE_PHOTO_SIZE = 5 * 1024 * 1024  # 5 MB
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["LEGACY_UPLOAD_FOLDER"] = LEGACY_UPLOAD_FOLDER
+app.config["PROFILE_PHOTO_UPLOAD_FOLDER"] = PROFILE_PHOTO_UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 
-# Create resume folder automatically
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(PROFILE_PHOTO_UPLOAD_FOLDER, exist_ok=True)
 
 
 # ============================================================
@@ -80,6 +172,35 @@ def allowed_file(filename):
         and filename.rsplit(".", 1)[1].lower()
         in ALLOWED_EXTENSIONS
     )
+
+
+def allowed_profile_photo(upload):
+
+    if not upload or not upload.filename or "." not in upload.filename:
+        return False
+
+    extension = upload.filename.rsplit(".", 1)[1].lower()
+
+    if extension not in ALLOWED_IMAGE_EXTENSIONS:
+        return False
+
+    upload.stream.seek(0, os.SEEK_END)
+    photo_size = upload.stream.tell()
+    upload.stream.seek(0)
+
+    if photo_size > MAX_PROFILE_PHOTO_SIZE:
+        return False
+
+    header = upload.stream.read(12)
+    upload.stream.seek(0)
+
+    if extension in {"jpg", "jpeg"}:
+        return header.startswith(b"\xff\xd8\xff")
+
+    if extension == "png":
+        return header.startswith(b"\x89PNG\r\n\x1a\n")
+
+    return header.startswith(b"RIFF") and header[8:12] == b"WEBP"
 
 
 # ============================================================
@@ -113,6 +234,14 @@ def init_db():
 
         )
     """)
+
+    user_columns = {
+        row["name"]
+        for row in conn.execute("PRAGMA table_info(users)")
+    }
+
+    if "profile_photo" not in user_columns:
+        conn.execute("ALTER TABLE users ADD COLUMN profile_photo TEXT")
 
 
     # --------------------------------------------------------
@@ -335,7 +464,189 @@ def home():
 @app.route("/about")
 def about():
 
-    return render_template("about.html")
+    return render_template(
+        "about.html",
+        featured_posts=BLOG_POSTS[:2]
+    )
+
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+
+    if session.get("is_admin"):
+        return redirect(url_for("admin_dashboard"))
+
+    admin_configured = bool(ADMIN_EMAIL and ADMIN_PASSWORD)
+
+    if request.method == "POST":
+
+        if not admin_configured:
+            flash("Staff access has not been configured on the server.", "warning")
+
+        else:
+            submitted_email = request.form.get("email", "").strip().casefold()
+            submitted_password = request.form.get("password", "")
+            email_matches = hmac.compare_digest(submitted_email, ADMIN_EMAIL)
+            password_matches = hmac.compare_digest(submitted_password, ADMIN_PASSWORD)
+
+            if email_matches and password_matches:
+                session.clear()
+                session["is_admin"] = True
+                return redirect(url_for("admin_dashboard"))
+
+            flash("Invalid staff email or password.", "danger")
+
+    return render_template(
+        "admin_login.html",
+        admin_configured=admin_configured
+    )
+
+@app.route("/admin")
+def admin_dashboard():
+
+    if not session.get("is_admin"):
+        return redirect(url_for("admin_login"))
+
+    conn = get_db()
+    applicants = conn.execute("""
+        SELECT
+            applications.id,
+            applications.name,
+            applications.email,
+            applications.phone,
+            applications.skills,
+            applications.experience,
+            applications.resume,
+            applications.created_at,
+            jobs.title AS job_title,
+            users.id AS user_id,
+            users.profile_photo
+        FROM applications
+        LEFT JOIN jobs ON jobs.id = applications.job_id
+        LEFT JOIN users ON lower(users.email) = lower(applications.email)
+        ORDER BY applications.id DESC
+    """).fetchall()
+    conn.close()
+
+    return render_template(
+        "admin_dashboard.html",
+        applicants=applicants
+    )
+
+
+@app.route("/admin/logout")
+def admin_logout():
+
+    session.clear()
+    flash("Staff session ended.", "success")
+    return redirect(url_for("home"))
+
+@app.route("/admin/applicants/<int:user_id>/photo")
+def admin_candidate_photo(user_id):
+
+    if not session.get("is_admin"):
+        return redirect(url_for("admin_login"))
+
+    conn = get_db()
+    user = conn.execute(
+        "SELECT profile_photo FROM users WHERE id = ?",
+        (user_id,)
+    ).fetchone()
+    conn.close()
+
+    if not user or not user["profile_photo"]:
+        abort(404)
+
+    return send_from_directory(
+        app.config["PROFILE_PHOTO_UPLOAD_FOLDER"],
+        user["profile_photo"]
+    )
+
+@app.route("/applications/<int:application_id>/resume")
+def application_resume(application_id):
+
+    if not session.get("is_admin") and "user_id" not in session:
+        return redirect(url_for("login"))
+
+    conn = get_db()
+    application = conn.execute(
+        "SELECT email, resume FROM applications WHERE id = ?",
+        (application_id,)
+    ).fetchone()
+    conn.close()
+
+    if not application or not application["resume"]:
+        abort(404)
+
+    if not session.get("is_admin") and application["email"].casefold() != session.get("user_email", "").casefold():
+        abort(403)
+
+    filename = application["resume"]
+    resume_folder = app.config["UPLOAD_FOLDER"]
+
+    if not os.path.isfile(os.path.join(resume_folder, filename)):
+        resume_folder = app.config["LEGACY_UPLOAD_FOLDER"]
+
+    if not os.path.isfile(os.path.join(resume_folder, filename)):
+        abort(404)
+
+    return send_from_directory(resume_folder, filename, as_attachment=True)
+
+@app.route("/profile/photo")
+def candidate_profile_photo():
+
+    if "user_id" not in session:
+        abort(403)
+
+    conn = get_db()
+    user = conn.execute(
+        "SELECT profile_photo FROM users WHERE id = ?",
+        (session["user_id"],)
+    ).fetchone()
+    conn.close()
+
+    if not user or not user["profile_photo"]:
+        abort(404)
+
+    return send_from_directory(
+        app.config["PROFILE_PHOTO_UPLOAD_FOLDER"],
+        user["profile_photo"]
+    )
+def blog():
+
+    return render_template(
+        "blog.html",
+        posts=BLOG_POSTS
+    )
+
+
+@app.route("/blog")
+def blog():
+
+    return render_template(
+        "blog.html",
+        posts=BLOG_POSTS
+    )
+
+
+@app.route("/blog/<slug>")
+def blog_post(slug):
+
+    post = next(
+        (post for post in BLOG_POSTS if post["slug"] == slug),
+        None
+    )
+
+    if post is None:
+        abort(404)
+
+    related_posts = [item for item in BLOG_POSTS if item != post]
+
+    return render_template(
+        "blog_post.html",
+        post=post,
+        related_posts=related_posts
+    )
 
 
 # ============================================================
@@ -901,6 +1212,15 @@ def candidates():
                 url_for("candidates")
             )
 
+        profile_photo = request.files.get("profile_photo")
+        has_profile_photo = bool(profile_photo and profile_photo.filename)
+
+        if has_profile_photo and not allowed_profile_photo(profile_photo):
+            flash("Profile photos must be valid JPG, PNG, or WebP images under 5 MB.", "danger")
+            return redirect(
+                url_for("candidates", job_id=job_id) if job_id else url_for("candidates")
+            )
+
 
         # ----------------------------------------------------
         # CREATE UNIQUE FILE NAME
@@ -927,14 +1247,18 @@ def candidates():
         # SAVE FILE
         # ----------------------------------------------------
 
-        resume_path = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            unique_filename
-        )
+        resume_path = os.path.join(app.config["UPLOAD_FOLDER"], unique_filename)
+        resume.save(resume_path)
 
-        resume.save(
-            resume_path
-        )
+        profile_photo_filename = None
+
+        if has_profile_photo:
+            photo_extension = secure_filename(profile_photo.filename).rsplit(".", 1)[1].lower()
+            profile_photo_filename = str(uuid.uuid4()) + "." + photo_extension
+            profile_photo.save(os.path.join(
+                app.config["PROFILE_PHOTO_UPLOAD_FOLDER"],
+                profile_photo_filename
+            ))
 
 
         # ----------------------------------------------------
@@ -942,6 +1266,12 @@ def candidates():
         # ----------------------------------------------------
 
         conn = get_db()
+
+        if profile_photo_filename:
+            conn.execute(
+                "UPDATE users SET profile_photo = ? WHERE id = ?",
+                (profile_photo_filename, session["user_id"])
+            )
 
         conn.execute("""
             INSERT INTO applications
@@ -983,9 +1313,17 @@ def candidates():
         )
 
 
+    conn = get_db()
+    user = conn.execute(
+        "SELECT profile_photo FROM users WHERE id = ?",
+        (session["user_id"],)
+    ).fetchone()
+    conn.close()
+
     return render_template(
         "candidates.html",
-        selected_job_id=selected_job_id
+        selected_job_id=selected_job_id,
+        profile_photo=user["profile_photo"] if user else None
     )
 
 

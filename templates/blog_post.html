@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} | TalentHub Solutions{% endblock %}
+
+{% block content %}
+<article class="container page-section article-page">
+    <a class="article-back-link" href="{{ url_for('blog') }}">&larr; All articles</a>
+
+    <header class="article-header">
+        <p class="eyebrow">{{ post.category }} <span aria-hidden="true">/</span> {{ post.read_time }}</p>
+        <h1>{{ post.title }}</h1>
+        <p class="article-deck">{{ post.excerpt }}</p>
+    </header>
+
+    <div class="article-layout">
+        <div class="article-body">
+            {% for section in post.sections %}
+            <section>
+                <h2>{{ section.heading }}</h2>
+                <p>{{ section.body }}</p>
+            </section>
+            {% endfor %}
+
+            <div class="article-contact">
+                <h2>Take your next step</h2>
+                <p>Explore career support or speak with the TalentHub team about your goals.</p>
+                <a class="btn btn-primary" href="{{ url_for('candidates') }}">Candidate support</a>
+            </div>
+        </div>
+
+        <aside class="article-sidebar">
+            <p class="eyebrow">Keep exploring</p>
+            <h2>More career insights</h2>
+            {% for related in related_posts %}
+            <a class="related-article" href="{{ url_for('blog_post', slug=related.slug) }}">
+                <span>{{ related.category }}</span>
+                <strong>{{ related.title }}</strong>
+            </a>
+            {% endfor %}
+        </aside>
+    </div>
+</article>
+{% endblock %}

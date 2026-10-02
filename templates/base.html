@@ -83,6 +83,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link{% if request.endpoint in ['blog', 'blog_post'] %} active{% endif %}"
+                       href="{{ url_for('blog') }}">
+                        Blog
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link{% if request.endpoint == 'jobs' %} active{% endif %}"
                        href="{{ url_for('jobs') }}">
                         Jobs
@@ -113,7 +120,22 @@
 
                 <!-- ================= AUTHENTICATION ================= -->
 
-                {% if session.get("user_id") %}
+                {% if session.get("is_admin") %}
+
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link{% if request.endpoint == 'admin_dashboard' %} active{% endif %}"
+                           href="{{ url_for('admin_dashboard') }}">
+                            Applicant Review
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_logout') }}">
+                            Staff Logout
+                        </a>
+                    </li>
+
+                {% elif session.get("user_id") %}
 
                     <!-- DASHBOARD -->
                     <li class="nav-item ms-lg-2">
@@ -216,6 +238,8 @@
         <p class="mb-0">
             © 2026 TalentHub Solution. All rights reserved.
         </p>
+
+        <a class="footer-staff-link" href="{{ url_for('admin_login') }}">Staff access</a>
 
     </div>
 

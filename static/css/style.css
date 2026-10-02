@@ -598,6 +598,270 @@ textarea:focus-visible {
     border-radius: 5px;
 }
 
+.candidate-profile-photo,
+.candidate-photo-current {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.candidate-profile-photo img,
+.candidate-photo-current img,
+.admin-applicant-photo,
+.candidate-avatar-placeholder {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.candidate-photo-current img {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+}
+
+.candidate-avatar-placeholder {
+    color: #087f78;
+    background: #e2f2ed;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+}
+
+.footer-staff-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #c7d5d3;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.footer-staff-link:hover {
+    color: #fff;
+}
+
+.admin-login-page {
+    display: grid;
+    align-items: center;
+}
+
+.admin-login-card {
+    max-width: 500px;
+}
+
+.admin-login-card h1,
+.admin-page-header h1 {
+    margin-bottom: 12px;
+    font-size: 2.35rem;
+}
+
+.admin-intro,
+.admin-page-header > div > p:last-child {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.admin-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.admin-page-header p {
+    margin-bottom: 0;
+}
+
+.admin-result-count {
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.admin-result-count strong {
+    color: var(--ink);
+}
+
+.admin-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.admin-applicant-table {
+    min-width: 920px;
+    margin: 0;
+}
+
+.applicant-identity {
+    display: flex;
+    min-width: 150px;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-applicant-photo,
+.applicant-identity .candidate-avatar-placeholder {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    font-size: 1.15rem;
+}
+
+.applicant-identity strong {
+    max-width: 150px;
+    overflow-wrap: anywhere;
+}
+
+.admin-phone,
+.admin-skills {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.candidate-profile-photo,
+.candidate-photo-current {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.candidate-profile-photo img,
+.candidate-photo-current img,
+.admin-applicant-photo,
+.candidate-avatar-placeholder {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.candidate-photo-current img {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+}
+
+.candidate-avatar-placeholder {
+    color: #087f78;
+    background: #e2f2ed;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+}
+
+.footer-staff-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #c7d5d3;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.footer-staff-link:hover {
+    color: #fff;
+}
+
+.admin-login-page {
+    display: grid;
+    align-items: center;
+}
+
+.admin-login-card {
+    max-width: 500px;
+}
+
+.admin-login-card h1,
+.admin-page-header h1 {
+    margin-bottom: 12px;
+    font-size: 2.35rem;
+}
+
+.admin-intro,
+.admin-page-header > div > p:last-child {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.admin-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.admin-page-header p {
+    margin-bottom: 0;
+}
+
+.admin-result-count {
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.admin-result-count strong {
+    color: var(--ink);
+}
+
+.admin-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.admin-applicant-table {
+    min-width: 920px;
+    margin: 0;
+}
+
+.applicant-identity {
+    display: flex;
+    min-width: 150px;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-applicant-photo,
+.applicant-identity .candidate-avatar-placeholder {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    font-size: 1.15rem;
+}
+
+.applicant-identity strong {
+    max-width: 150px;
+    overflow-wrap: anywhere;
+}
+
+.admin-phone,
+.admin-skills {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
 @media (max-width: 575.98px) {
     .employer-form {
         grid-template-columns: 1fr;
@@ -611,5 +875,517 @@ textarea:focus-visible {
 
     .employer-form > button {
         width: 100%;
+    }
+
+    .admin-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.about-hero {
+    position: relative;
+    display: flex;
+    min-height: 398px;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    background-color: #153c46;
+    background-image: linear-gradient(90deg, rgba(13, 48, 57, 0.92) 0%, rgba(13, 48, 57, 0.76) 54%, rgba(13, 48, 57, 0.18) 100%), url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&h=1000&q=85");
+    background-position: center 44%;
+    background-size: cover;
+}
+
+.about-hero-copy {
+    width: 100%;
+    max-width: 1060px;
+    padding: 24px 0;
+}
+
+.about-hero .eyebrow {
+    color: #f0a05a;
+    text-transform: uppercase;
+}
+
+.about-hero h1 {
+    max-width: 980px;
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: clamp(2.2rem, 3.9vw, 3.3rem);
+    line-height: 1.07;
+}
+
+.about-hero-copy > p:not(.eyebrow) {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.about-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 16px;
+}
+
+.about-hero-link {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.about-hero-link span,
+.journey-step a span,
+.blog-read-link span {
+    color: #e88a27;
+}
+
+.about-story {
+    padding: 76px 0;
+    background: var(--paper);
+}
+
+.about-story-grid {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
+    gap: 70px;
+    align-items: start;
+}
+
+.about-story h2,
+.about-values-grid > div:first-child h2,
+.about-contact-inner h2 {
+    margin: 0;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    line-height: 1.17;
+}
+
+.about-story-copy p {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.85;
+}
+
+.about-journey {
+    padding-top: 88px;
+    padding-bottom: 88px;
+}
+
+.about-journey > .row,
+.about-blog > .row,
+.blog-listing > .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.about-journey .page-heading h2 {
+    max-width: 700px;
+    font-size: clamp(2rem, 3.8vw, 2.8rem);
+}
+
+.journey-step {
+    height: 100%;
+    padding: 25px 22px 24px 0;
+    border-top: 2px solid #087f78;
+}
+
+.journey-number {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #b85f31;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.journey-step h3 {
+    margin: 0 0 12px;
+    font-size: 1.5rem;
+}
+
+.journey-step p {
+    min-height: 112px;
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+.journey-step a,
+.blog-read-link {
+    color: #126b65;
+    font-size: 0.93rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.placement-note {
+    max-width: 780px;
+    margin: 28px 0 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.65;
+}
+
+.about-values-band {
+    padding: 74px 0;
+    color: #fff;
+    background: #18313b;
+}
+
+.about-values-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 42px;
+    align-items: start;
+}
+
+.about-values-grid > div:first-child h2,
+.about-value h3 {
+    color: #fff;
+}
+
+.about-value {
+    padding-top: 14px;
+    border-top: 2px solid #e88a27;
+}
+
+.about-value h3 {
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.about-value p {
+    margin: 0;
+    color: #c7d5d3;
+    line-height: 1.75;
+}
+
+.about-blog {
+    padding-top: 82px;
+    padding-bottom: 82px;
+}
+
+.blog-listing-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.blog-listing-heading h2,
+.blog-cta h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.blog-card {
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.blog-card-art {
+    display: flex;
+    min-height: 150px;
+    align-items: end;
+    padding: 16px 22px;
+    overflow: hidden;
+    background-color: #dcece7;
+    background-image: repeating-linear-gradient(135deg, transparent 0 20px, rgba(8, 127, 120, 0.1) 20px 22px);
+}
+
+.blog-card-art span {
+    color: #087f78;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.blog-card-content {
+    padding: 22px;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #b85f31;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.blog-meta span:last-child {
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.blog-card h2,
+.blog-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+    line-height: 1.3;
+}
+
+.blog-card h2 a,
+.blog-card h3 a {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.blog-card h2 a:hover,
+.blog-card h3 a:hover {
+    color: #087f78;
+}
+
+.blog-card-content > p {
+    min-height: 76px;
+    margin-bottom: 18px;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.blog-card-compact {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+}
+
+.blog-card-compact .blog-card-art {
+    min-height: 100%;
+    align-items: start;
+}
+
+.blog-cta,
+.about-contact-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 26px;
+    margin-top: 64px;
+    padding: 32px;
+    background: var(--paper);
+    border-left: 4px solid #e88a27;
+}
+
+.about-contact-band {
+    padding: 44px 0;
+    background: var(--paper);
+}
+
+.about-contact-inner {
+    margin-top: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.blog-hero {
+    padding: 76px 0 72px;
+    color: #fff;
+    background-color: #153c46;
+    background-image: linear-gradient(90deg, rgba(13, 48, 57, 0.92), rgba(13, 48, 57, 0.72)), url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&h=700&q=85");
+    background-position: center 48%;
+    background-size: cover;
+}
+
+.blog-hero h1 {
+    max-width: 720px;
+    margin-bottom: 14px;
+    color: #fff;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+}
+
+.blog-hero > .container > p:last-child {
+    max-width: 620px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 1.08rem;
+    line-height: 1.75;
+}
+
+.blog-listing {
+    padding-top: 70px;
+}
+
+.article-page {
+    max-width: 1120px;
+}
+
+.article-back-link {
+    display: inline-block;
+    margin-bottom: 38px;
+    color: #126b65;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.article-header {
+    max-width: 800px;
+    margin-bottom: 48px;
+}
+
+.article-header h1 {
+    margin-bottom: 16px;
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.12;
+}
+
+.article-deck {
+    color: var(--muted);
+    font-size: 1.16rem;
+    line-height: 1.75;
+}
+
+.article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 700px) minmax(220px, 280px);
+    gap: 80px;
+    align-items: start;
+}
+
+.article-body section {
+    margin-bottom: 34px;
+}
+
+.article-body h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.article-body p {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.85;
+}
+
+.article-sidebar {
+    position: sticky;
+    top: 24px;
+    padding-top: 4px;
+}
+
+.article-sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.35rem;
+}
+
+.related-article {
+    display: block;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+}
+
+.related-article span,
+.related-article strong {
+    display: block;
+}
+
+.related-article span {
+    margin-bottom: 6px;
+    color: #b85f31;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.related-article strong {
+    color: var(--ink);
+    line-height: 1.45;
+}
+
+.article-contact {
+    margin-top: 48px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+}
+
+@media (max-width: 767.98px) {
+    .about-hero {
+        min-height: 480px;
+        background-image: linear-gradient(90deg, rgba(13, 48, 57, 0.92), rgba(13, 48, 57, 0.7)), url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&h=1200&q=85");
+    }
+
+    .about-hero-copy {
+        padding: 46px 0;
+    }
+
+    .about-hero h1 {
+        font-size: 2.1rem;
+        line-height: 1.12;
+    }
+
+    .about-hero-copy > p:not(.eyebrow) {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .about-story-grid,
+    .about-values-grid,
+    .article-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .about-story {
+        padding: 56px 0;
+    }
+
+    .journey-step p {
+        min-height: 0;
+    }
+
+    .about-values-band {
+        padding: 56px 0;
+    }
+
+    .blog-card-compact {
+        grid-template-columns: 110px minmax(0, 1fr);
+    }
+
+    .blog-card-compact .blog-card-content {
+        padding: 18px;
+    }
+
+    .article-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-hero-actions,
+    .blog-listing-heading,
+    .blog-cta,
+    .about-contact-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .about-hero-actions {
+        gap: 18px;
+    }
+
+    .blog-card-compact {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-card-compact .blog-card-art {
+        min-height: 108px;
+    }
+
+    .blog-card-content > p {
+        min-height: 0;
+    }
+
+    .blog-cta {
+        padding: 24px;
+    }
+
+    .article-header {
+        margin-bottom: 34px;
     }
 }

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Applicant Review | TalentHub Solutions{% endblock %}
+
+{% block content %}
+<section class="container page-section admin-dashboard">
+    <header class="admin-page-header">
+        <div>
+            <p class="eyebrow">Private staff area</p>
+            <h1>Applicant review</h1>
+            <p>Candidate information and files submitted through the website.</p>
+        </div>
+        <a class="btn btn-outline-primary" href="{{ url_for('admin_logout') }}">Staff logout</a>
+    </header>
+
+    <div class="admin-result-count"><strong>{{ applicants|length }}</strong> {{ 'application' if applicants|length == 1 else 'applications' }}</div>
+
+    {% if applicants %}
+    <div class="table-responsive admin-table-wrap">
+        <table class="table admin-applicant-table">
+            <thead>
+                <tr>
+                    <th scope="col">Candidate</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Opportunity</th>
+                    <th scope="col">Experience & skills</th>
+                    <th scope="col">Submitted</th>
+                    <th scope="col">Files</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                <tr>
+                    <td>
+                        <div class="applicant-identity">
+                            {% if applicant.user_id and applicant.profile_photo %}
+                            <img class="admin-applicant-photo" src="{{ url_for('admin_candidate_photo', user_id=applicant.user_id) }}" alt="Profile photo for {{ applicant.name }}" loading="lazy">
+                            {% else %}
+                            <span class="candidate-avatar-placeholder" aria-hidden="true">{{ applicant.name[:1]|upper }}</span>
+                            {% endif %}
+                            <strong>{{ applicant.name }}</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="mailto:{{ applicant.email }}">{{ applicant.email }}</a>
+                        {% if applicant.phone %}<span class="admin-phone">{{ applicant.phone }}</span>{% endif %}
+                    </td>
+                    <td>{{ applicant.job_title or 'General application' }}</td>
+                    <td>
+                        <strong>{{ applicant.experience or 'Not specified' }}</strong>
+                        <span class="admin-skills">{{ applicant.skills or 'Skills not provided' }}</span>
+                    </td>
+                    <td>{{ applicant.created_at or 'Date unavailable' }}</td>
+                    <td>
+                        {% if applicant.resume %}
+                        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('application_resume', application_id=applicant.id) }}">View resume</a>
+                        {% else %}
+                        <span class="text-muted">No resume</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h2>No applications yet</h2>
+        <p>Candidate submissions will appear here after they submit a resume.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Staff Sign In | TalentHub Solutions{% endblock %}
+
+{% block content %}
+<section class="container page-section admin-login-page">
+    <div class="form-container admin-login-card">
+        <p class="eyebrow">TalentHub staff</p>
+        <h1>Applicant review</h1>
+        <p class="admin-intro">Sign in to review candidate applications and their submitted files.</p>
+
+        {% if admin_configured %}
+        <form method="POST" autocomplete="on">
+            <div class="mb-3">
+                <label class="form-label" for="admin-email">Staff email</label>
+                <input class="form-control" id="admin-email" name="email" type="email" autocomplete="username" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="admin-password">Password</label>
+                <input class="form-control" id="admin-password" name="password" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Sign in</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="status">
+            Staff access is not configured yet. Set ADMIN_EMAIL, ADMIN_PASSWORD, and SECRET_KEY in the server environment.
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

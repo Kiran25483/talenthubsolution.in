@@ -27,6 +27,13 @@
 
                 </div>
 
+                {% if user.profile_photo %}
+                <div class="candidate-profile-photo">
+                    <img src="{{ url_for('candidate_profile_photo') }}" alt="Profile photo for {{ user.name }}">
+                    <span>Profile photo</span>
+                </div>
+                {% endif %}
+
 
                 <hr>
 
@@ -124,8 +131,7 @@
                                         {% if application.resume %}
 
                                             <a
-                                                href="{{ url_for('static', filename='uploads/resumes/' + application.resume) }}"
-                                                target="_blank"
+                                                href="{{ url_for('application_resume', application_id=application.id) }}"
                                                 class="btn btn-sm btn-outline-primary">
 
                                                 View Resume

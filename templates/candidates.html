@@ -39,6 +39,13 @@
                     <input type="hidden" name="job_id" value="{{ selected_job_id }}">
                     {% endif %}
 
+                    {% if profile_photo %}
+                    <div class="candidate-photo-current mb-3">
+                        <img src="{{ url_for('candidate_profile_photo') }}" alt="Your current profile photo">
+                        <span>Current profile photo</span>
+                    </div>
+                    {% endif %}
+
 
                     <!-- Full Name -->
                     <div class="mb-3">
@@ -144,6 +151,26 @@
 
                     </div>
 
+
+                    <!-- Profile Photo -->
+                    <div class="mb-4">
+
+                        <label for="profile_photo" class="form-label">
+                            Profile Photo <span class="text-muted">(optional)</span>
+                        </label>
+
+                        <input
+                            type="file"
+                            id="profile_photo"
+                            name="profile_photo"
+                            class="form-control"
+                            accept="image/jpeg,image/png,image/webp">
+
+                        <div class="form-text">
+                            JPG, PNG, or WebP image, up to 5 MB. Only you and authorized staff can view it.
+                        </div>
+
+                    </div>
 
                     <!-- Resume Upload -->
                     <div class="mb-4">

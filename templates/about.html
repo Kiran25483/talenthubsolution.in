@@ -1,159 +1,122 @@
 
 {% extends "base.html" %}
 
-{% block title %}About Us - TalentHub Solution{% endblock %}
+{% block title %}About TalentHub Solutions | Recruitment, Training & Placement{% endblock %}
 
 {% block content %}
-
-<div class="container page-section">
-
-    <!-- Page Heading -->
-    <div class="page-heading text-center mb-5">
-        <p class="eyebrow">Who we are</p>
-        <h1>About TalentHub Solution</h1>
-        <p class="lead">
-            Connecting businesses with skilled professionals and helping
-            candidates build successful careers.
-        </p>
-    </div>
-
-    <!-- About Company -->
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-
-            <p>
-                <strong>TalentHub Solution</strong> is a professional
-                recruitment consultancy and training company providing
-                comprehensive <strong>technical and non-technical hiring
-                solutions</strong> for businesses across various industries.
-            </p>
-
-            <p>
-                We help organizations identify, attract, and hire qualified
-                professionals for IT, software, AI/ML, data, cloud, DevOps,
-                testing, HR, finance, sales, marketing, operations,
-                administration, and other business functions.
-            </p>
-
-            <p>
-                Along with recruitment services, TalentHub Solution provides
-                <strong>job-oriented training and career development
-                programs</strong> designed to help candidates improve their
-                technical and professional skills, prepare for interviews,
-                and become job-ready.
-            </p>
-
-            <p>
-                Our services include
-                <strong>technical recruitment, non-technical recruitment,
-                candidate sourcing and screening, corporate hiring support,
-                professional training, resume assistance, interview
-                preparation, and career guidance.</strong>
-            </p>
-
-            <p>
-                At TalentHub Solution, we aim to create a strong connection
-                between <strong>employers looking for skilled talent</strong>
-                and <strong>candidates looking for the right career
-                opportunities.</strong>
-            </p>
-
-        </div>
-    </div>
-
-    <hr class="my-5">
-
-    <!-- Mission -->
-    <div class="row mb-5">
-        <div class="col-md-6">
-            <h3>Our Mission</h3>
-
-            <p>
-                To simplify hiring for organizations and help candidates
-                discover suitable career opportunities through professional
-                recruitment, training, and career development services.
-            </p>
-        </div>
-
-        <!-- Vision -->
-        <div class="col-md-6">
-            <h3>Our Vision</h3>
-
-            <p>
-                To build a trusted talent ecosystem where businesses find
-                the right professionals and candidates find meaningful
-                opportunities to grow their careers.
-            </p>
-        </div>
-    </div>
-
-    <!-- Expertise -->
-    <div class="mb-5">
-
-        <h3>Our Expertise</h3>
-
-        <div class="row mt-3">
-
-            <div class="col-md-6">
-                <ul>
-                    <li>Technical Recruitment</li>
-                    <li>Non-Technical Recruitment</li>
-                    <li>Contract Staffing</li>
-                    <li>Permanent Hiring</li>
-                </ul>
+<section class="about-hero">
+    <div class="container">
+        <div class="about-hero-copy">
+            <p class="eyebrow">People. Potential. Progress.</p>
+            <h1>Connecting businesses with skilled professionals and helping candidates build successful careers.</h1>
+            <p>Recruitment, practical training, and thoughtful placement support, brought together around people and the work they want to do.</p>
+            <div class="about-hero-actions">
+                <a class="btn btn-light" href="{{ url_for('services') }}">Explore our services</a>
+                <a class="about-hero-link" href="{{ url_for('contact') }}">Talk to our team <span aria-hidden="true">&rarr;</span></a>
             </div>
-
-            <div class="col-md-6">
-                <ul>
-                    <li>Bulk Hiring</li>
-                    <li>Executive Search</li>
-                    <li>Candidate Sourcing & Screening</li>
-                    <li>Corporate Hiring Support</li>
-                </ul>
-            </div>
-
         </div>
+    </div>
+</section>
 
+<section class="about-story">
+    <div class="container about-story-grid">
+        <div>
+            <p class="eyebrow">A people-first talent partner</p>
+            <h2>Good work starts with the right connection.</h2>
+        </div>
+        <div class="about-story-copy">
+            <p>TalentHub Solutions works with employers to understand the role, the team, and the skills that matter. We support technical and non-technical hiring across functions including software, data, cloud, HR, finance, sales, and operations.</p>
+            <p>For candidates, we make space for the next step: build practical skills, prepare to present your experience, and find opportunities that fit your goals and experience.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container page-section about-journey" id="our-approach">
+    <div class="page-heading">
+        <p class="eyebrow">How we help</p>
+        <h2>One connected path from capability to opportunity.</h2>
+        <p class="lead">Whether you are building a team or building your career, support should meet you where you are.</p>
     </div>
 
-    <!-- Training & Career Support -->
-    <div class="mb-5">
+    <div class="row g-4 mt-2">
+        <div class="col-md-4">
+            <article class="journey-step">
+                <span class="journey-number">01</span>
+                <h3>Recruitment</h3>
+                <p>Role-focused sourcing and candidate screening help employers connect with people whose skills and experience fit the work.</p>
+                <a href="{{ url_for('services') }}">Hiring solutions <span aria-hidden="true">&rarr;</span></a>
+            </article>
+        </div>
+        <div class="col-md-4">
+            <article class="journey-step" id="training">
+                <span class="journey-number">02</span>
+                <h3>Training</h3>
+                <p>Job-oriented technical and professional learning can help candidates strengthen relevant skills, build practical examples, and prepare for interviews.</p>
+                <a href="{{ url_for('services') }}#training">Training support <span aria-hidden="true">&rarr;</span></a>
+            </article>
+        </div>
+        <div class="col-md-4">
+            <article class="journey-step" id="placement">
+                <span class="journey-number">03</span>
+                <h3>Placement assistance</h3>
+                <p>Resume guidance, interview preparation, and access to relevant openings help candidates take informed steps toward suitable roles.</p>
+                <a href="{{ url_for('jobs') }}">Explore opportunities <span aria-hidden="true">&rarr;</span></a>
+            </article>
+        </div>
+    </div>
+    <p class="placement-note">Placement assistance is guidance and opportunity matching; employment depends on role requirements and employer selection.</p>
+</section>
 
-        <h3>Training & Career Development</h3>
+<section class="about-values-band">
+    <div class="container about-values-grid">
+        <div>
+            <p class="eyebrow">Our purpose</p>
+            <h2>Make meaningful progress possible for both sides of a hiring conversation.</h2>
+        </div>
+        <div class="about-value">
+            <h3>Our mission</h3>
+            <p>Make hiring clearer for organizations and career development more accessible for professionals.</p>
+        </div>
+        <div class="about-value">
+            <h3>Our approach</h3>
+            <p>Listen first, focus on relevant skills, and support the next practical step.</p>
+        </div>
+    </div>
+</section>
 
-        <p>
-            We also support candidates through job-oriented training and
-            career development services, including:
-        </p>
-
-        <ul>
-            <li>Technical & Professional Training</li>
-            <li>Resume Preparation</li>
-            <li>Interview Preparation</li>
-            <li>Career Guidance</li>
-            <li>Job-Ready Skill Development</li>
-        </ul>
-
+<section class="container page-section about-blog">
+    <div class="blog-listing-heading">
+        <div>
+            <p class="eyebrow">From the TalentHub journal</p>
+            <h2>Ideas you can put to work.</h2>
+        </div>
+        <a class="blog-read-link" href="{{ url_for('blog') }}">View all articles <span aria-hidden="true">&rarr;</span></a>
     </div>
 
-    <!-- Closing Section -->
-    <div class="text-center mt-5">
-
-        <h3>Recruit. Train. Grow.</h3>
-
-        <p>
-            TalentHub Solution connects organizations with the right talent
-            while helping professionals develop the skills they need to
-            achieve their career goals.
-        </p>
-
+    <div class="row g-4">
+        {% for post in featured_posts %}
+        <div class="col-md-6">
+            <article class="blog-card blog-card-compact">
+                <div class="blog-card-art" aria-hidden="true"><span>{{ "%02d"|format(loop.index) }}</span></div>
+                <div class="blog-card-content">
+                    <div class="blog-meta"><span>{{ post.category }}</span><span>{{ post.read_time }}</span></div>
+                    <h3><a href="{{ url_for('blog_post', slug=post.slug) }}">{{ post.title }}</a></h3>
+                    <p>{{ post.excerpt }}</p>
+                    <a class="blog-read-link" href="{{ url_for('blog_post', slug=post.slug) }}">Read article <span aria-hidden="true">&rarr;</span></a>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
     </div>
+</section>
 
-    <div class="page-actions text-center mt-4">
-        <a href="{{ url_for('services') }}" class="btn btn-primary me-2">Explore Services</a>
-        <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Talk to Our Team</a>
+<section class="about-contact-band">
+    <div class="container about-contact-inner">
+        <div>
+            <p class="eyebrow">Start a conversation</p>
+            <h2>Let’s find the right next step.</h2>
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('contact') }}">Contact TalentHub</a>
     </div>
-
-</div>
-
+</section>
 {% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Career Insights | TalentHub Solutions{% endblock %}
+
+{% block content %}
+<section class="blog-hero">
+    <div class="container">
+        <p class="eyebrow">TalentHub journal</p>
+        <h1>Ideas for your next career move.</h1>
+        <p>Practical notes on hiring, training, resumes, and interviews for people building what comes next.</p>
+    </div>
+</section>
+
+<section class="container page-section blog-listing">
+    <div class="blog-listing-heading">
+        <div>
+            <p class="eyebrow">The latest</p>
+            <h2>Career insights</h2>
+        </div>
+        <p>Useful guidance for candidates and the teams who hire them.</p>
+    </div>
+
+    <div class="row g-4">
+        {% for post in posts %}
+        <div class="col-md-6 col-lg-4">
+            <article class="blog-card">
+                <div class="blog-card-art" aria-hidden="true">
+                    <span>{{ "%02d"|format(loop.index) }}</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-meta">
+                        <span>{{ post.category }}</span>
+                        <span>{{ post.read_time }}</span>
+                    </div>
+                    <h2><a href="{{ url_for('blog_post', slug=post.slug) }}">{{ post.title }}</a></h2>
+                    <p>{{ post.excerpt }}</p>
+                    <a class="blog-read-link" href="{{ url_for('blog_post', slug=post.slug) }}">Read article <span aria-hidden="true">&rarr;</span></a>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="blog-cta">
+        <div>
+            <p class="eyebrow">Put your next step in motion</p>
+            <h2>Ready to talk through your goals?</h2>
+        </div>
+        <a class="btn btn-primary" href="{{ url_for('contact') }}">Contact TalentHub</a>
+    </div>
+</section>
+{% endblock %}
