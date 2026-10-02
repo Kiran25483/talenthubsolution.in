@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Hire Talent | TalentHub Solutions{% endblock %}
+
+{% block content %}
+
+<div class="container page-section">
+
+    <div class="form-container">
+
+        <h1>Hire Talent</h1>
+
+        <p>
+            Tell us about your hiring requirement.
+        </p>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Company Name</label>
+
+                <input type="text"
+                       name="company"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Contact Person</label>
+
+                <input type="text"
+                       name="contact_person"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Phone</label>
+
+                <input type="text"
+                       name="phone"
+                       class="form-control">
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Job Title</label>
+
+                <input type="text"
+                       name="job_title"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Number of Openings</label>
+
+                <input type="number"
+                       name="openings"
+                       class="form-control"
+                       min="1">
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Job Description</label>
+
+                <textarea name="description"
+                          class="form-control"
+                          rows="6"></textarea>
+
+            </div>
+
+
+            <button class="btn btn-primary">
+                Submit Requirement
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

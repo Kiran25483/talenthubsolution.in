@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Candidates | TalentHub Solutions{% endblock %}
+
+{% block content %}
+
+<div class="container page-section">
+
+    <div class="form-container">
+
+        <h1>Submit Your Resume</h1>
+
+        <p>
+            Register with TalentHub Solutions for suitable
+            career opportunities.
+        </p>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Phone</label>
+
+                <input type="text"
+                       name="phone"
+                       class="form-control">
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Skills</label>
+
+                <input type="text"
+                       name="skills"
+                       class="form-control"
+                       placeholder="Python, Azure, Java, HR, Sales...">
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Experience</label>
+
+                <input type="text"
+                       name="experience"
+                       class="form-control"
+                       placeholder="2 Years">
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Resume File Name / Link</label>
+
+                <input type="text"
+                       name="resume"
+                       class="form-control"
+                       placeholder="resume.pdf">
+
+            </div>
+
+
+            <button class="btn btn-primary">
+                Submit Resume
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
